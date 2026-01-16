@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Presentation, FileCode, BookOpen, Code, Layers, ChevronDown, ChevronUp, FolderOpen } from 'lucide-react';
+import { FileText, Presentation, FileCode, BookOpen, Code, Layers, ChevronDown, ChevronUp, FolderOpen, Github, Linkedin } from 'lucide-react';
 
 const CoursePlanningSite = () => {
   const [activeTab, setActiveTab] = useState('frontend');
@@ -648,10 +648,8 @@ const CoursePlanningSite = () => {
             className="flex gap-4 transition-transform duration-100 ease-linear"
             style={{ transform: `translateX(-${scrollPosition}px)` }}
           >
-            {/* Renderiza os livros duas vezes para efeito de loop infinito */}
             {[...books, ...books].map((book, index) => {
-              // Construir URL raw do GitHub com encoding correto (parênteses devem ser %28 e %29)
-              const imageUrl = `https://raw.githubusercontent.com/ProfLucasSousa/LucasSousaAulas/main/${courseFolder}/Extras/Livros%20%28imgs%29/${encodeURIComponent(book.file)}`;
+              const imageUrl = `./src/Livros-imgs/${courseFolder}/${book.file.replace(/ /g, '%20')}`;
               const placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="150" height="200"%3E%3Crect fill="%23f3f4f6" width="150" height="200"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%239ca3af" font-size="12"%3EImagem%3C/text%3E%3C/svg%3E';
 
               return (
@@ -662,6 +660,7 @@ const CoursePlanningSite = () => {
                       alt={book.name}
                       className="w-full h-full object-cover"
                       onError={(e) => {
+                        console.error('Failed to load:', imageUrl); // Debug
                         e.target.onerror = null;
                         e.target.src = placeholder;
                       }}
@@ -743,11 +742,10 @@ const CoursePlanningSite = () => {
           </div>
 
           <div
-            className="px-6 pb-6 pt-0 border-t border-white/20 overflow-hidden transition-all duration-300"
-            style={{ maxHeight: isExpanded ? '500px' : '0px', opacity: isExpanded ? 1 : 0 }}
+            className={`px-6 border-t border-white/20 overflow-hidden dropdown-content ${isExpanded ? 'expanded' : ''}`}
             aria-hidden={!isExpanded}
           >
-            <div className="flex gap-2 flex-wrap mt-4">
+            <div className="flex gap-2 flex-wrap">
               {lesson.materials && lesson.materials.md && (
                 <a 
                   href={`${baseUrl}/${getSemesterPath(courseFolder, semester)}/${encodeURIComponent(examFileName)}`}
@@ -794,11 +792,10 @@ const CoursePlanningSite = () => {
           </div>
 
           <div
-            className="px-6 pb-6 pt-0 border-t border-white/20 overflow-hidden transition-all duration-300"
-            style={{ maxHeight: isExpanded ? '500px' : '0px', opacity: isExpanded ? 1 : 0 }}
+            className={`px-6 border-t border-white/20 overflow-hidden dropdown-content ${isExpanded ? 'expanded' : ''}`}
             aria-hidden={!isExpanded}
           >
-            <div className="flex gap-2 flex-wrap mt-4">
+            <div className="flex gap-2 flex-wrap">
               {lesson.materials && lesson.materials.md && (
                 <a 
                   href={`${baseUrl}/${getSemesterPath(courseFolder, semester)}/${encodeURIComponent(gsFileName)}`}
@@ -840,11 +837,10 @@ const CoursePlanningSite = () => {
           </div>
 
           <div
-            className="px-6 pb-6 pt-0 border-t border-white/20 overflow-hidden transition-all duration-300"
-            style={{ maxHeight: isExpanded ? '500px' : '0px', opacity: isExpanded ? 1 : 0 }}
+            className={`px-6 border-t border-white/20 overflow-hidden dropdown-content ${isExpanded ? 'expanded' : ''}`}
             aria-hidden={!isExpanded}
           >
-            <div className="flex gap-2 flex-wrap mt-4">
+            <div className="flex gap-2 flex-wrap">
               {lesson.materials && lesson.materials.md && (
                 <a 
                   href={`${baseUrl}/${getSemesterPath(courseFolder, semester)}/${encodeURIComponent(`Check-point${cpNumber}.md`)}`}
@@ -912,11 +908,10 @@ const CoursePlanningSite = () => {
         </div>
 
         <div
-          className="px-6 pb-6 pt-0 border-t border-gray-100 overflow-hidden transition-all duration-300"
-          style={{ maxHeight: isExpanded ? '500px' : '0px', opacity: isExpanded ? 1 : 0 }}
+          className={`px-6 border-t border-gray-100 overflow-hidden dropdown-content ${isExpanded ? 'expanded' : ''}`}
           aria-hidden={!isExpanded}
         >
-          <div className="flex gap-2 flex-wrap mt-4">
+          <div className="flex gap-2 flex-wrap">
             {lesson.materials && lesson.materials.md && (
               <a 
                 href={`${baseUrl}/${getSemesterPath(courseFolder, semester)}/${encodeURIComponent(getFileName(courseKey, lesson.num, 'md'))}`}
@@ -985,28 +980,100 @@ const CoursePlanningSite = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#E4097D] via-[#C8056B] to-[#A0044F]">
+        <div className="absolute inset-0 bg-black/5"></div>
+        
+        {/* Pattern overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+          {/* Logo e Links Sociais */}
+          <div className="flex justify-between items-start mb-8">
+            {/* Logo */}
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl shadow-xl flex items-center justify-center transform hover:scale-105 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-full h-full">
+                  <rect width="100" height="100" rx="20" fill="#E4097D"/>
+                  <text 
+                    x="50" 
+                    y="50" 
+                    fontFamily="Arial, sans-serif" 
+                    fontSize="45" 
+                    fontWeight="bold" 
+                    fill="white" 
+                    textAnchor="middle" 
+                    dominantBaseline="central">LS</text>
+                </svg>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex gap-3">
+              <a 
+                href="https://github.com/ProfLucasSousa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center transition-all hover:scale-110 group"
+                aria-label="GitHub"
+              >
+                <Github className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/lucasss-professor/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center transition-all hover:scale-110 group"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+              </a>
+            </div>
+          </div>
+
+          {/* Conteúdo Principal */}
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
               Planejamento de Aulas
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8">
+            <p className="text-lg md:text-xl text-white/95 max-w-3xl mx-auto mb-8 drop-shadow-md font-medium">
               Explore o conteúdo completo das disciplinas de desenvolvimento web com materiais organizados e acessíveis
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-white/80">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span>3 Disciplinas</span>
+            
+            {/* Stats Cards */}
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl px-6 py-4 shadow-2xl border border-white/20 transform hover:scale-105 transition-all hover:bg-white/20 min-w-[140px]">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold text-white drop-shadow-lg">3</div>
+                  <div className="text-white/90 font-semibold text-sm uppercase tracking-wide">Disciplinas</div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span>2 Semestres</span>
+
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl px-6 py-4 shadow-2xl border border-white/20 transform hover:scale-105 transition-all hover:bg-white/20 min-w-[140px]">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <Layers className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold text-white drop-shadow-lg">2</div>
+                  <div className="text-white/90 font-semibold text-sm uppercase tracking-wide">Semestres</div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span>60+ Aulas</span>
+
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl px-6 py-4 shadow-2xl border border-white/20 transform hover:scale-105 transition-all hover:bg-white/20 min-w-[140px]">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <Code className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-3xl font-bold text-white drop-shadow-lg">60+</div>
+                  <div className="text-white/90 font-semibold text-sm uppercase tracking-wide">Aulas</div>
+                </div>
               </div>
             </div>
           </div>

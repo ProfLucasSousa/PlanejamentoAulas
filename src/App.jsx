@@ -649,7 +649,7 @@ const CoursePlanningSite = () => {
             style={{ transform: `translateX(-${scrollPosition}px)` }}
           >
             {[...books, ...books].map((book, index) => {
-              const imageUrl = `./src/Livros-imgs/${courseFolder}/${book.file.replace(/ /g, '%20')}`;
+              const imageUrl = `/Livros-imgs/${courseFolder}/${book.file.replace(/ /g, '%20')}`;
               const placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="150" height="200"%3E%3Crect fill="%23f3f4f6" width="150" height="200"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%239ca3af" font-size="12"%3EImagem%3C/text%3E%3C/svg%3E';
 
               return (

@@ -270,7 +270,13 @@ const CoursePlanningSite = () => {
           num: '01', 
           title: 'Git',
           description: 'Fundamentos de versionamento de código com Git e GitHub.',
-          materials: { pptx: true }
+          materials: { pptx: true, folder: true }
+        },
+        { 
+          num: '01.5', 
+          title: 'GitHub',
+          description: 'Fundamentos de versionamento de código com Git e GitHub.',
+          materials: { md: true, folder: true }
         },
         { 
           num: '02', 
@@ -285,16 +291,16 @@ const CoursePlanningSite = () => {
           materials: { pptx: true }
         },
         { 
-          num: '04', 
-          title: 'Controle de Fluxos',
-          description: 'Estruturas condicionais e de controle de fluxo em JavaScript.',
-          materials: { pptx: true, pdf: true }
-        },
-        { 
           num: 'CP', 
           title: 'Checkpoint 01', 
           isCheckpoint: true,
           materials: { folder: true }
+        },
+        { 
+          num: '04', 
+          title: 'Controle de Fluxos',
+          description: 'Estruturas condicionais e de controle de fluxo em JavaScript.',
+          materials: { pptx: true, pdf: true }
         },
         { 
           num: '05', 
@@ -309,16 +315,16 @@ const CoursePlanningSite = () => {
           materials: { pptx: true, pdf: true }
         },
         { 
-          num: '07', 
-          title: 'Objetos',
-          description: 'Trabalhando com objetos e suas propriedades em JavaScript.',
-          materials: { pptx: true, folder: true }
-        },
-        { 
           num: 'CP', 
           title: 'Checkpoint 02', 
           isCheckpoint: true,
           materials: { folder: true }
+        },
+        { 
+          num: '07', 
+          title: 'Objetos',
+          description: 'Trabalhando com objetos e suas propriedades em JavaScript.',
+          materials: { pptx: true, folder: true }
         },
         { 
           num: '08', 
@@ -333,16 +339,16 @@ const CoursePlanningSite = () => {
           materials: { pptx: true, folder: true }
         },
         { 
-          num: '10', 
-          title: 'Funções de Ordem Superior',
-          description: 'Funções avançadas: map, filter, reduce e callbacks.',
-          materials: { pptx: true }
-        },
-        { 
           num: 'CP', 
           title: 'Checkpoint 03', 
           isCheckpoint: true,
           materials: { folder: true }
+        },
+        { 
+          num: '10', 
+          title: 'Funções de Ordem Superior',
+          description: 'Funções avançadas: map, filter, reduce e callbacks.',
+          materials: { pptx: true }
         },
         { 
           num: 'GS', 
